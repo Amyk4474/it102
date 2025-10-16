@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kilometers and Miles Converter</title>
+    <script>
+        // Converts between kilometers and miles
+
+        let choice = prompt("Type 'K' for kilometers to miles, or 'M' for miles to kilometers:");
+
+        if (choice === "K" || choice === "k") {
+            let km = parseFloat(prompt("Enter kilometers:"));
+            let miles = km * 0.621371;
+            alert(km + " km = " + miles.toFixed(2) + " miles");
+        } 
+        else if (choice === "M" || choice === "m") {
+            let miles = parseFloat(prompt("Enter miles:"));
+            let km = miles / 0.621371;
+            alert(miles + " miles = " + km.toFixed(2) + " km");
+        } 
+        else {
+            alert("Invalid choice! Type 'K' or 'M'.");
+        }
+    </script>
+</head>
+<body>
+    <h2>Week 2: Kilometers and Miles Converter</h2>
+</body>
+</html>
