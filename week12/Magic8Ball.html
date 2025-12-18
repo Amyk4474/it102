@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic 8-Ball</title>
+    <style>
+        body {
+            font-family: Courier New, Courier New;
+            text-align: center;
+            padding: 50px;
+            background-color: #7b14c0;
+        }
+        #container {
+            background: #000000;
+            color: rgb(179, 113, 192);
+            padding: 80px;
+            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        h1 { margin: 0 0 20px 0; }
+        #answer { font-size: 24px; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Magic 8-Ball</h1>
+        <p>Ask me a yes/no question!</p>
+        <div id="answer">Shake me...</div>
+    </div>
+
+    <script>
+        // Array of possible 8-ball answers
+        const RESPONSES = [
+            "Yes",
+            "No",
+            "Maybe",
+            "Ask again",
+            "Without a doubt.",
+            "Don't count on it",
+            "Very doubtful",
+            "Signs point to yes"
+        ];
+
+        // Object Constructor for the Magic 8-Ball
+        function MagicEightBall() {
+            this.answers = RESPONSES;
+            // Method to get a random answer
+            this.getAnswer = function() {
+                const index = Math.floor(Math.random() * this.answers.length);
+                return this.answers[index];
+            };
+        }
+
+        // Function to validate the user's question
+        function isValidQuestion(input) {
+            const trimmed = input.trim();
+            if (trimmed === "") return false;
+            if (trimmed.length < 2) return false;
+            return true;
+        }
+
+        // Create the Magic 8-Ball instance
+        const ball = new MagicEightBall();
+
+        // Main interaction
+        document.getElementById('container').addEventListener('click', function() {
+            let question = prompt("Ask a yes/no question (or type 'quit' to stop):");
+
+            if (question === null || question.toLowerCase() === "quit") {
+                alert("Goodbye!");
+                return;
+            }
+
+            if (!isValidQuestion(question)) {
+                alert("Please enter a real question.");
+                return;
+            }
+
+            // Show a "thinking" message briefly
+            document.getElementById('answer').textContent = "Thinking...";
+            
+            // Small delay for dramatic effect
+            setTimeout(() => {
+                const answer = ball.getAnswer();
+                document.getElementById('answer').textContent = answer;
+            }, 1000);
+        });
+
+        // Initial message
+        alert("Welcome to the Magic 8-Ball!\nClick on the ball to ask a question.\nType 'quit' when you're done.");
+    </script>
+</body>
+</html>
