@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+function Truck(gas, mpg) {
+    // Added store mpg passed into the constructor
+    this.mpg = mpg;
+
+    this.gas = gas;
+
+    // Added starting range in miles (gas * mpg)
+    this.range = this.gas * this.mpg;
+
+    // Added assume not empty unless gas is 0 or less
+    this.empty = false;
+
+    this.drive = function (miles) {
+    this.gas -= miles / this.mpg;
+      // Added update range after driving
+      this.range = this.gas * this.mpg;
+
+    if (this.gas <= 0) {
+        this.empty = true;
+        this.gas = 0;       // prevent negative gas
+        this.range = 0;     // no range when empty
+    }
+    };
+
+    this.fill = function (gallons) {
+      // Added increase gas by gallons
+    this.gas += gallons;
+
+      // Added update range after filling
+      this.range = this.gas * this.mpg;
+
+      // Added if there is gas now, it's not empty
+    if (this.gas > 0) {
+        this.empty = false;
+    }
+    };
+
+    // Sets empty to true if no gas
+    if (this.gas <= 0) {
+    this.empty = true;
+      this.range = 0; // keep range consistent if starting empty
+    }
+}
+
+  //test code
+
+test = new Truck(20, 15);
+
+  alert("The range is: " + test.range); // expected output = a positive number
+test.drive(300);
+  alert("Empty after the drive? " + test.empty); // expected output = true
+test.fill(10);
+  alert("Empty after the fill? " + test.empty); // expected output = false
+</script>
+
+</body>
+</html>
